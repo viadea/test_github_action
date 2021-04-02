@@ -1,0 +1,18 @@
+name: signoff-check
+
+on: 
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+jobs:
+  signoff-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: sigoff-check job
+        uses: ./.github/workflows/signoff-check
+        env:
+          OWNER: viadea 
+          REPO_NAME: test_github_action 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_NUMBER: ${{ github.event.number }}
